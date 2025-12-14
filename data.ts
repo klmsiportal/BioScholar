@@ -32,7 +32,7 @@ export const BIO_MODULES: Module[] = [
       { id: 24, question: "Which of the following best describes physiology?", options: ["Study of structure", "Study of function", "Study of heredity", "Study of fossils"], correctAnswer: "Study of function" },
       { id: 25, question: "The science that deals with naming and classifying organisms is:", options: ["Taxonomy", "Ecology", "Cytology", "Biochemistry"], correctAnswer: "Taxonomy" },
       { id: 26, question: "Biology is considered a branch of:", options: ["Social sciences", "Physical sciences", "Natural sciences", "Applied sciences"], correctAnswer: "Natural sciences" },
-      { id: 27, question: "Which is the smallest level of biological organization?", options: ["Cell", "Atom", "Tissue", "Organ"], correctAnswer: "Cell" },
+      { id: 27, question: "Which is the smallest level of biological organization?", options: ["Cell", "Atom", "Tissue", "Organ"], correctAnswer: "Atom" },
       { id: 28, question: "The scientific name of humans is:", options: ["Homo erectus", "Homo habilis", "Homo sapiens", "Homo neanderthalensis"], correctAnswer: "Homo sapiens" },
       { id: 29, question: "The study of fossils is known as:", options: ["Embryology", "Palaeontology", "Anthropology", "Ecology"], correctAnswer: "Palaeontology" },
       { id: 30, question: "Biology helps farmers mainly by:", options: ["Understanding heredity of crops", "Controlling pests", "Producing hybrids", "All of the above"], correctAnswer: "All of the above" },
@@ -120,7 +120,7 @@ export const BIO_MODULES: Module[] = [
     title: "Module 3: Biological Organization",
     description: "Levels of Organization, Tissues, Organs and Systems.",
     questions: [
-      { id: 1, question: "Which of the following is the simplest level of biological organization?", options: ["Cell", "Atom", "Tissue", "Organ"], correctAnswer: "Cell" },
+      { id: 1, question: "Which of the following is the simplest level of biological organization?", options: ["Cell", "Atom", "Tissue", "Organ"], correctAnswer: "Atom" },
       { id: 2, question: "The basic unit of structure and function in living things is:", options: ["Atom", "Tissue", "Cell", "Organ"], correctAnswer: "Cell" },
       { id: 3, question: "A group of similar cells performing the same function forms:", options: ["Organ", "Tissue", "Organ system", "Population"], correctAnswer: "Tissue" },
       { id: 4, question: "A collection of different tissues working together is called:", options: ["Organ", "Cell", "System", "Organism"], correctAnswer: "Organ" },
