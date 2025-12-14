@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Microscope, Dna, Activity, Droplet, Bug, Leaf, Brain, Heart, Bone } from 'lucide-react';
+import { Microscope, Dna, Activity, Droplet, Bug, Leaf, Brain, Heart, Bone, PenTool, Image as ImageIcon, Loader2 } from 'lucide-react';
 import { generateDiagramConcept } from '../services/gemini';
 
 interface DiagramProps {
@@ -40,38 +40,53 @@ const Diagram: React.FC<DiagramProps> = ({ topic, context }) => {
   return (
     <div className="bg-white p-4 rounded-xl border border-slate-200 shadow-sm mt-4 flex flex-col items-center animate-fade-in">
         <h3 className="text-sm font-semibold text-slate-500 uppercase tracking-wider mb-2">Visual Illustration</h3>
-        <div className="p-6 bg-slate-50 rounded-full mb-4 border border-slate-100">
-            {getIcon()}
-        </div>
-        <div className="text-center">
-            <h4 className="font-bold text-slate-800 mb-1">{topic}</h4>
-            <p className="text-slate-600 text-sm italic">
-                {loading ? "Generating conceptual description..." : description}
-            </p>
-        </div>
         
-        {/* SVG Placeholder for Cell Structure - displayed if topic relates to cell */}
-        {topic.toLowerCase().includes('cell') && (
-            <div className="mt-4 w-full max-w-[200px] h-[150px] relative border border-dashed border-slate-300 rounded flex items-center justify-center bg-slate-50">
-                <svg viewBox="0 0 100 100" className="w-full h-full p-2">
-                    <circle cx="50" cy="50" r="45" fill="#e2e8f0" stroke="#94a3b8" strokeWidth="2" />
-                    <circle cx="50" cy="50" r="15" fill="#fca5a5" />
-                    <text x="50" y="50" fontSize="8" textAnchor="middle" fill="#7f1d1d" dy="2">Nucleus</text>
-                    <ellipse cx="70" cy="30" rx="10" ry="5" fill="#86efac" />
-                    <text x="70" y="30" fontSize="6" textAnchor="middle" fill="#14532d" dy="2">Mito</text>
-                </svg>
-            </div>
-        )}
-         {/* SVG Placeholder for Microscope */}
-         {topic.toLowerCase().includes('microscope') && (
-            <div className="mt-4 w-full max-w-[200px] h-[150px] relative border border-dashed border-slate-300 rounded flex items-center justify-center bg-slate-50">
-                 <svg viewBox="0 0 100 100" className="w-full h-full p-2">
-                    <rect x="40" y="80" width="20" height="10" fill="#475569" />
-                    <rect x="45" y="40" width="10" height="40" fill="#64748b" />
-                    <circle cx="50" cy="35" r="15" stroke="#475569" strokeWidth="3" fill="none"/>
-                    <path d="M 45 40 L 35 70" stroke="#64748b" strokeWidth="2" />
-                </svg>
-            </div>
+        {loading ? (
+             <div className="w-full flex flex-col items-center justify-center py-8">
+                <div className="relative">
+                    <div className="absolute inset-0 bg-indigo-100 rounded-full animate-ping opacity-75"></div>
+                    <div className="bg-white p-4 rounded-full border border-indigo-100 relative z-10">
+                         <PenTool size={32} className="text-indigo-600 animate-bounce" />
+                    </div>
+                </div>
+                <p className="mt-4 text-sm font-medium text-slate-500 animate-pulse">Sketching diagram concept...</p>
+             </div>
+        ) : (
+            <>
+                <div className="p-6 bg-slate-50 rounded-full mb-4 border border-slate-100 transition-all hover:scale-105">
+                    {getIcon()}
+                </div>
+                <div className="text-center">
+                    <h4 className="font-bold text-slate-800 mb-1">{topic}</h4>
+                    <p className="text-slate-600 text-sm italic">
+                        {description}
+                    </p>
+                </div>
+                
+                {/* SVG Placeholder for Cell Structure - displayed if topic relates to cell */}
+                {topic.toLowerCase().includes('cell') && (
+                    <div className="mt-4 w-full max-w-[200px] h-[150px] relative border border-dashed border-slate-300 rounded flex items-center justify-center bg-slate-50">
+                        <svg viewBox="0 0 100 100" className="w-full h-full p-2">
+                            <circle cx="50" cy="50" r="45" fill="#e2e8f0" stroke="#94a3b8" strokeWidth="2" />
+                            <circle cx="50" cy="50" r="15" fill="#fca5a5" />
+                            <text x="50" y="50" fontSize="8" textAnchor="middle" fill="#7f1d1d" dy="2">Nucleus</text>
+                            <ellipse cx="70" cy="30" rx="10" ry="5" fill="#86efac" />
+                            <text x="70" y="30" fontSize="6" textAnchor="middle" fill="#14532d" dy="2">Mito</text>
+                        </svg>
+                    </div>
+                )}
+                 {/* SVG Placeholder for Microscope */}
+                 {topic.toLowerCase().includes('microscope') && (
+                    <div className="mt-4 w-full max-w-[200px] h-[150px] relative border border-dashed border-slate-300 rounded flex items-center justify-center bg-slate-50">
+                         <svg viewBox="0 0 100 100" className="w-full h-full p-2">
+                            <rect x="40" y="80" width="20" height="10" fill="#475569" />
+                            <rect x="45" y="40" width="10" height="40" fill="#64748b" />
+                            <circle cx="50" cy="35" r="15" stroke="#475569" strokeWidth="3" fill="none"/>
+                            <path d="M 45 40 L 35 70" stroke="#64748b" strokeWidth="2" />
+                        </svg>
+                    </div>
+                )}
+            </>
         )}
     </div>
   );
