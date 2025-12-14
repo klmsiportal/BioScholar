@@ -1,14 +1,21 @@
-import React, { useState } from 'react';
-import { signInWithPopup, signOut, User } from 'firebase/auth';
-import { auth, googleProvider } from '../firebase';
+'use client';
+
+import React, { useState, useEffect } from 'react';
+import { signInWithPopup, signOut, User, onAuthStateChanged } from 'firebase/auth';
+import { auth, googleProvider } from '@/lib/firebase';
 import { LogIn, LogOut, User as UserIcon, CreditCard, X } from 'lucide-react';
 
-interface AuthProps {
-  user: User | null;
-}
-
-const Auth: React.FC<AuthProps> = ({ user }) => {
+// Use internal state in Auth for better client-side handling
+const Auth: React.FC = () => {
+  const [user, setUser] = useState<User | null>(null);
   const [showManual, setShowManual] = useState(false);
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (u) => {
+        setUser(u);
+    });
+    return () => unsubscribe();
+  }, []);
 
   const handleGoogleLogin = async () => {
     try {

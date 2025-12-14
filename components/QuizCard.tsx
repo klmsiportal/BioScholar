@@ -1,7 +1,9 @@
+'use client';
+
 import React, { useState } from 'react';
-import { Question } from '../types';
+import { Question } from '@/lib/types';
 import { CheckCircle2, XCircle, Lightbulb, ArrowRight, Image as ImageIcon } from 'lucide-react';
-import { generateExplanation } from '../services/gemini';
+import { generateExplanationAction } from '@/app/actions';
 import Diagram from './Diagram';
 
 interface QuizCardProps {
@@ -22,9 +24,9 @@ const QuizCard: React.FC<QuizCardProps> = ({ question, onNext, isLast }) => {
 
   const checkAnswer = async () => {
     setIsRevealed(true);
-    // Fetch explanation dynamically if not present
+    // Fetch explanation dynamically via Server Action
     if (!explanation) {
-        const exp = await generateExplanation(question.question, question.correctAnswer);
+        const exp = await generateExplanationAction(question.question, question.correctAnswer);
         setExplanation(exp);
     }
   };

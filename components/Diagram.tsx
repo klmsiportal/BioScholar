@@ -1,6 +1,8 @@
+'use client';
+
 import React, { useEffect, useState } from 'react';
 import { Microscope, Dna, Activity, Droplet, Bug, Leaf, Brain, Heart, Bone, PenTool, Image as ImageIcon, Loader2 } from 'lucide-react';
-import { generateDiagramConcept } from '../services/gemini';
+import { generateDiagramConceptAction } from '@/app/actions';
 
 interface DiagramProps {
   topic: string;
@@ -15,8 +17,7 @@ const Diagram: React.FC<DiagramProps> = ({ topic, context }) => {
     const fetchDesc = async () => {
         setLoading(true);
         // We only fetch description if it's a "deep" concept, otherwise we use static icons
-        // For this demo, let's just simulate the "Illustration" aspect with Icons + AI text
-        const desc = await generateDiagramConcept(topic);
+        const desc = await generateDiagramConceptAction(topic);
         setDescription(desc);
         setLoading(false);
     };
@@ -63,7 +64,7 @@ const Diagram: React.FC<DiagramProps> = ({ topic, context }) => {
                     </p>
                 </div>
                 
-                {/* SVG Placeholder for Cell Structure - displayed if topic relates to cell */}
+                {/* SVG Placeholder for Cell Structure */}
                 {topic.toLowerCase().includes('cell') && (
                     <div className="mt-4 w-full max-w-[200px] h-[150px] relative border border-dashed border-slate-300 rounded flex items-center justify-center bg-slate-50">
                         <svg viewBox="0 0 100 100" className="w-full h-full p-2">
@@ -72,17 +73,6 @@ const Diagram: React.FC<DiagramProps> = ({ topic, context }) => {
                             <text x="50" y="50" fontSize="8" textAnchor="middle" fill="#7f1d1d" dy="2">Nucleus</text>
                             <ellipse cx="70" cy="30" rx="10" ry="5" fill="#86efac" />
                             <text x="70" y="30" fontSize="6" textAnchor="middle" fill="#14532d" dy="2">Mito</text>
-                        </svg>
-                    </div>
-                )}
-                 {/* SVG Placeholder for Microscope */}
-                 {topic.toLowerCase().includes('microscope') && (
-                    <div className="mt-4 w-full max-w-[200px] h-[150px] relative border border-dashed border-slate-300 rounded flex items-center justify-center bg-slate-50">
-                         <svg viewBox="0 0 100 100" className="w-full h-full p-2">
-                            <rect x="40" y="80" width="20" height="10" fill="#475569" />
-                            <rect x="45" y="40" width="10" height="40" fill="#64748b" />
-                            <circle cx="50" cy="35" r="15" stroke="#475569" strokeWidth="3" fill="none"/>
-                            <path d="M 45 40 L 35 70" stroke="#64748b" strokeWidth="2" />
                         </svg>
                     </div>
                 )}
